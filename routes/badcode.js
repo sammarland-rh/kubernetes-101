@@ -3,7 +3,6 @@ var router = express.Router();
 
 sleepTime = process.env.SLEEP_TIME || 200
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
   msleep(sleepTime)
   var i = 0;
