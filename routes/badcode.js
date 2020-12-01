@@ -27,16 +27,9 @@ router.get('/json', function(req, res, next) {
     i++;
     x += Math.sqrt(x);
   }
-  msleep(sleepTime)
   res.json({"name": "bad code"});
 });
 
-function msleep(n) {
-  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
-}
 
-function sleep(n) {
-  msleep(n*1000);
-}
 
 module.exports = router;
