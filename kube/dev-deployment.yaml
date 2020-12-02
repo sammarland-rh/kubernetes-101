@@ -18,7 +18,9 @@ spec:
       containers:
       - image: quay.io/sammarland_rh/node-kube-101:latest
         name: node-kube-101
-        resources: {}
+        resources:
+          requests:
+            cpu: "50m"
         ports:
         - containerPort: 3000
         envFrom:
