@@ -21,6 +21,9 @@ spec:
       containers:
       - image: quay.io/sammarland_rh/node-kube-101:latest
         name: kube-101
+        envFrom:
+          - configMapRef:
+              name: app-config
         resources:
           limits:
             cpu: "50m"
