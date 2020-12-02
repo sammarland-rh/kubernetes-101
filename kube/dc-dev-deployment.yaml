@@ -1,32 +1,34 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
 metadata:
-  labels:
-    app: kube-101
+  creationTimestamp: null
   name: kube-101
+  labels:
+    app: kube-101 
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      app: kube-101
-  strategy: {}
+    deployment-config.name: kube-101
+  strategy:
+    resources: {}
   template:
     metadata:
+      creationTimestamp: null
       labels:
+        deployment-config.name: kube-101
         app: kube-101
     spec:
       containers:
       - image: quay.io/sammarland_rh/node-kube-101:latest
-        name: node-kube-101
-        resources:
-          requests:
-            cpu: "50m"
-        ports:
-        - containerPort: 3000
+        name: kube-101
         envFrom:
           - configMapRef:
               name: app-config
-status: {}
+        resources:
+          limits:
+            cpu: "50m"
+  test: false
+  triggers: null
 ---
 apiVersion: v1
 kind: ConfigMap
