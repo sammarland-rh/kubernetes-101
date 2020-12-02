@@ -1,0 +1,71 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  name: kube-101
+  labels:
+    app: kube-101 
+spec:
+  replicas: 1
+  selector:
+    deployment-config.name: kube-101
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deployment-config.name: kube-101
+        app: kube-101
+    spec:
+      containers:
+      - image: quay.io/sammarland_rh/node-kube-101:latest
+        name: kube-101
+        resources:
+          limits:
+            cpu: "50m"
+  test: false
+  triggers: null
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  labels:
+    app: kube-101
+data:
+  BODY_TEXT: Testing out Kubernetes
+  EVENT_NAME: Kubernetes 101
+  ORG: NWG - Dev
+  ORG_FULL: Natwest Group
+  SLEEP_TIME: "500"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-101-service 
+  labels:
+    app: kube-101
+spec:
+  selector:
+    app: kube-101 
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: kube-101-prod
+  labels:
+    app: kube-101
+spec:
+  host: kube-101-nwg-dev.apps.sandy.demolab.local
+  port:
+    targetPort: 3000
+  to:
+    kind: Service
+    name: kube-101-service
+    weight: 100
+  wildcardPolicy: None
