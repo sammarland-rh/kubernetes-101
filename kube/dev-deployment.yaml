@@ -30,10 +30,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app-config
+  labels:
+    app: kube-101
 data:
   BODY_TEXT: Testing out Kubernetes
   EVENT_NAME: Kubernetes 101
-  ORG: NWG - Development
+  ORG: NWG - Dev
   ORG_FULL: Natwest Group
   SLEEP_TIME: "500"
 ---
@@ -41,6 +43,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kube-101-service 
+  labels:
+    app: kube-101
 spec:
   selector:
     app: kube-101 
@@ -52,9 +56,11 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: kube-101
+  name: kube-101-prod
+  labels:
+    app: kube-101
 spec:
-  host: kube-101-nwg-demo.apps.sandy.demolab.local
+  host: kube-101-nwg-dev.apps.sandy.demolab.local
   port:
     targetPort: 3000
   to:
