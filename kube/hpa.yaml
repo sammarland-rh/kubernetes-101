@@ -1,7 +1,6 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  creationTimestamp: null
   name: kube-101
 spec:
   maxReplicas: 4
@@ -11,6 +10,3 @@ spec:
     kind: DeploymentConfig
     name: kube-101
   targetCPUUtilizationPercentage: 40
-status:
-  currentReplicas: 0
-  desiredReplicas: 0
