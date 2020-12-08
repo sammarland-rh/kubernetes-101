@@ -3,7 +3,7 @@
 ## Endpoints available
 
 ### Badcode
-`URL:PORT/badcome/json` - Hit this address lots of times to generate load. If you run this with a HPA this will trigger autoscaling. I use this command:
+`URL:PORT/badcode/json` - Hit this address lots of times to generate load. If you run this with a HPA this will trigger autoscaling. I use this command:
 
 `hey -c 100 -z 5m http://URL:PORT/badcode/json` and that generate enough load to trigger the hpa after about 1 minute.
 
