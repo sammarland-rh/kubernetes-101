@@ -64,7 +64,6 @@ metadata:
   labels:
     app: kube-101
 spec:
-  host: kube-101-nwg-dev.apps.sandy.demolab.local
   port:
     targetPort: 3000
   to:
